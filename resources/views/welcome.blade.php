@@ -69,10 +69,10 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ route('home') }}">{{ trans('messages.home') }}</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('login') }}">{{ trans('messages.login') }}</a>
+                        <a href="{{ route('register') }}">{{ trans('messages.register') }}</a>
                     @endauth
                 </div>
             @endif

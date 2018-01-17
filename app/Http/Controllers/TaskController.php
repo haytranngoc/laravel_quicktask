@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\User;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\ValidationRequest;
 
@@ -13,11 +15,15 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::orderBy('created_at', 'asc')->paginate(config('setting.paginate'));
+        if (Auth::check()) {
+            $tasks = $request->user()->tasks()->orderBy('created_at', 'asc')->paginate(config('setting.paginate'));
 
-        return view('tasks', compact('tasks'));
+            return view('tasks', compact('tasks'));
+        }
+        
+        return redirect()->action('TaskController@index');
     }
 
     /**
@@ -39,9 +45,9 @@ class TaskController extends Controller
     public function store(ValidationRequest $request)
     {
         try {
-            $task = new Task;
-            $task->name = $request->name;
-            $task->save();
+            $request->user()->tasks()->create([
+                'name' => $request->input('name'),
+            ]);
 
             return redirect()->action('TaskController@index');
         } catch (Exception $e) {
@@ -90,10 +96,11 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         try {
             $task = Task::findOrFail($id);
+            $this->authorize('destroy', $task);
             $task->delete();
             
             return redirect()->action('TaskController@index');
