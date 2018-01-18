@@ -1,11 +1,25 @@
 <?php
 
-	return [
-		'title' => 'Laravel Quickstart - Basic',
-		'heading' => 'Task List',
-		'task' => 'Task',
-		'addTask' => 'Add Task',
-		'currentTask' => 'Current Tasks',
-		'deleteTask' => 'Delete',
-		'error' => 'Whoops! Something went wrong!',
-	];
+    return [
+        'title' => 'Laravel Quickstart - Basic',
+        'heading' => 'Task List',
+        'task' => 'Task',
+        'addTask' => 'Add Task',
+        'currentTask' => 'Current Tasks',
+        'deleteTask' => 'Delete',
+        'error' => 'Whoops! Something went wrong!',
+        'login' => 'Login',
+        'register' => 'Register',
+        'home' => 'Home',
+        'logout' => 'Logout',
+        'dashboard' => 'Dashboard',
+        'you_are_login' => 'You are logged in!',
+        'remember_me' => 'Remember Me',
+        'password' => 'Password',
+        'forgot_pass' => 'Forgot Your Password?',
+        'email' => 'E-Mail Address',
+        'name' => 'Name',
+        'confirm_pass' => 'Confirm Password',
+        'reset_password' => 'Reset Password',
+        'send_password_reset_link' => 'Send Password Reset Link',
+    ];
